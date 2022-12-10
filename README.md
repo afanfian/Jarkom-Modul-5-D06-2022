@@ -157,30 +157,33 @@ Disini kami menggunakan teknik VLSM yaitu dengan Pembagian Subnetting, Gambar Tr
 ## Soal C  
 Anya, putri pertama Loid, juga berpesan kepada anda agar melakukan Routing agar setiap perangkat pada jaringan tersebut dapat terhubung.  
 ### Jawab  
-Ketikkan command ```ip router``` Routing pada 3 router, yaitu Router Strix, Ostania & Westalis, sebagai berikut:  
+Ketikkan command ```route -n``` Routing pada 3 router, yaitu Router Strix, Ostania & Westalis, sebagai berikut:  
   * **Router Strix**  
-    default via 192.168.122.1 dev eth0  metric 305  
-    10.18.0.0/22 via 10.18.7.146 dev eth2   
-    10.18.4.0/23 via 10.18.7.150 dev eth1   
-    10.18.6.0/24 via 10.18.7.150 dev eth1   
-    10.18.7.0/25 via 10.18.7.146 dev eth2   
-    10.18.7.128/29 via 10.18.7.146 dev eth2   
-    10.18.7.136/29 via 10.18.7.150 dev eth1   
-    10.18.7.144/30 dev eth2  proto kernel  scope link  src 10.18.7.145   
-    10.18.7.148/30 dev eth1  proto kernel  scope link  src 10.18.7.149   
-    192.168.122.0/24 dev eth0  proto kernel  scope link  src 192.168.122.183   
+    Destination     Gateway         Genmask         Flags Metric Ref    Use Iface  
+    0.0.0.0         192.168.122.1   0.0.0.0         UG    208    0        0 eth0  
+    10.18.0.0       10.18.7.146     255.255.252.0   UG    0      0        0 eth2  
+    10.18.4.0       10.18.7.150     255.255.254.0   UG    0      0        0 eth1  
+    10.18.6.0       10.18.7.150     255.255.255.0   UG    0      0        0 eth1  
+    10.18.7.0       10.18.7.146     255.255.255.128 UG    0      0        0 eth2  
+    10.18.7.128     10.18.7.146     255.255.255.248 UG    0      0        0 eth2  
+    10.18.7.136     10.18.7.150     255.255.255.248 UG    0      0        0 eth1  
+    10.18.7.144     0.0.0.0         255.255.255.252 U     0      0        0 eth2  
+    10.18.7.148     0.0.0.0         255.255.255.252 U     0      0        0 eth1  
+    192.168.122.0   0.0.0.0         255.255.255.0   U     0      0        0 eth0  
   * **Router Ostania**  
-    default via 10.18.7.149 dev eth0  
-    10.18.4.0/23 dev eth1  proto kernel  scope link  src 10.18.4.1  
-    10.18.6.0/24 dev eth3  proto kernel  scope link  src 10.18.6.1  
-    10.18.7.136/29 dev eth2  proto kernel  scope link  src 10.18.7.137  
-    10.18.7.148/30 dev eth0  proto kernel  scope link  src 10.18.7.150  
+    Destination     Gateway         Genmask         Flags Metric Ref    Use Iface  
+    0.0.0.0         10.18.7.149     0.0.0.0         UG    0      0        0 eth0  
+    10.18.4.0       0.0.0.0         255.255.254.0   U     0      0        0 eth1  
+    10.18.6.0       0.0.0.0         255.255.255.0   U     0      0        0 eth3  
+    10.18.7.136     0.0.0.0         255.255.255.248 U     0      0        0 eth2  
+    10.18.7.148     0.0.0.0         255.255.255.252 U     0      0        0 eth0   
   * **Router Westalis**  
-    default via 10.18.7.145 dev eth0  
-    10.18.0.0/22 dev eth1  proto kernel  scope link  src 10.18.0.1  
-    10.18.7.0/25 dev eth2  proto kernel  scope link  src 10.18.7.1  
-    10.18.7.128/29 dev eth3  proto kernel  scope link  src 10.18.7.129  
-    10.18.7.144/30 dev eth0  proto kernel  scope link  src 10.18.7.146  
+    Destination     Gateway         Genmask         Flags Metric Ref    Use Iface  
+    0.0.0.0         10.18.7.145     0.0.0.0         UG    0      0        0 eth0  
+    10.18.0.0       0.0.0.0         255.255.252.0   U     0      0        0 eth1  
+    10.18.7.0       0.0.0.0         255.255.255.128 U     0      0        0 eth2  
+    10.18.7.128     0.0.0.0         255.255.255.248 U     0      0        0 eth3  
+    10.18.7.144     0.0.0.0         255.255.255.252 U     0      0        0 eth0  
 ## Soal D  
 Tugas berikutnya adalah memberikan ip pada subnet Forger, Desmond, Blackbell, dan Briar secara dinamis menggunakan bantuan DHCP server. Kemudian kalian ingat bahwa kalian harus setting DHCP Relay pada router yang menghubungkannya.
 ### Jawab
