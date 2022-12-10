@@ -274,13 +274,13 @@ Tugas berikutnya adalah memberikan ip pada subnet Forger, Desmond, Blackbell, da
 
 Berikut adalah tampilan IP di tiap subnet yang membutuhkan IP dinamis:
 - Forger<br>
-  {screenshot}
+  ![soal_D_forger](https://user-images.githubusercontent.com/55425460/206826568-02686f5e-ba01-49bc-a99c-dca5cd661576.png)
 - Desmond<br>
-  {screenshot}
+  ![soal_D_desmond](https://user-images.githubusercontent.com/55425460/206826573-6d14eb52-a400-47d3-a8c7-01bcef9355ec.png)
 - Blackbell<br>
-  {screenshot}
+  ![soal_D_blackbell](https://user-images.githubusercontent.com/55425460/206826575-b6b6aca4-0551-4504-8b41-da7cff5a26c9.png)
 - Briar<br>
-  {screenshot}
+  ![soal_D_briar](https://user-images.githubusercontent.com/55425460/206826578-06ec9ea4-8eaa-4076-bfda-40aef53583ca.png)
 
 
 ## Soal 1  
@@ -309,7 +309,7 @@ Kalian diminta untuk melakukan drop semua TCP dan UDP dari luar Topologi kalian 
     iptables -A FORWARD -p tcp -d 10.18.7.131 -i eth0 -j DROP
     ```
 2. Tes koneksi ke luar di server WISE
-    {screenshot}
+    ![soal_no2_no2](https://user-images.githubusercontent.com/55425460/206826587-7e1e011a-0ae5-4fe8-ad1b-71f340f41eb6.png)
 
 ## Soal 3  
 Loid meminta kalian untuk membatasi DHCP dan DNS Server hanya boleh menerima maksimal 2 koneksi ICMP secara bersamaan menggunakan iptables, selebihnya didrop.  
@@ -323,11 +323,11 @@ Loid meminta kalian untuk membatasi DHCP dan DNS Server hanya boleh menerima mak
 
 Berikut adalah tampilan saat melakukan `ping` ke Eden dari 3 client yang berbeda:
 - Koneksi pertama (dari Desmond)
-  {screenshot}
+  ![soal_no3_desmond](https://user-images.githubusercontent.com/55425460/206826595-d4706d9e-893e-4e58-a274-8642152400e4.png)
 - Koneksi kedua (dari Forger)
-  {screenshot}
+  ![soal_no3_forger](https://user-images.githubusercontent.com/55425460/206826599-613266c2-e6c1-495e-8736-d716548bb0ce.png)
 - Koneksi ketiga (dari Blackbell)
-  {screenshot}
+  ![soal_no3_blackbell](https://user-images.githubusercontent.com/55425460/206826601-498f8dc6-8601-404f-ba5e-b5236f45ef45.png)
 
 ## Soal 4  
 Akses menuju Web Server hanya diperbolehkan disaat jam kerja yaitu Senin sampai Jumat pada pukul 07.00 - 16.00.  
