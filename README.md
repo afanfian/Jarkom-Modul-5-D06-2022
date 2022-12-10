@@ -335,6 +335,24 @@ Berikut adalah tampilan saat melakukan `ping` ke Eden dari 3 client yang berbeda
 ## Soal 4  
 Akses menuju Web Server hanya diperbolehkan disaat jam kerja yaitu Senin sampai Jumat pada pukul 07.00 - 16.00.  
 ### Jawab  
+Menambahkan command tersebut di Web Server (Garden dan SSS) 
+```
+    iptables -A INPUT -m time --timestart 07:00 --timestop 16:00 --weekdays Mon,Tue,Wed,Thu,Fri -j ACCEPT
+    iptables -A INPUT -j REJECT
+```  
+  
+### Pengetesan  
+1. Melakukan ping dari Blackbell ke Garden pada saat jam kerja  
+![Ping BlackBell ke Garden saat jam kerja](https://user-images.githubusercontent.com/70679432/206841954-2b9597a9-1689-45e4-a28c-d192172dd89a.jpg)  
+
+2. Melakukan ping dari Blackbell ke SSS pada saat jam kerja  
+![Ping BlackBell ke SSS saat jam kerja](https://user-images.githubusercontent.com/70679432/206841971-64062073-3564-4678-9526-41b4065a4ac0.jpg)  
+
+3. Melakukan ping dari Blackbell ke Garden saat diluar jam kerja  
+![Ping BlackBell ke Garden diluar jam kerja](https://user-images.githubusercontent.com/70679432/206841987-05a09349-adde-41cf-a886-e0a9437a6332.jpg)  
+
+4. Melakukan ping dari Blackbell ke SSS saat diluar jam kerja  
+![Ping BlackBell ke SSS diluar jam kerja](https://user-images.githubusercontent.com/70679432/206842011-0a1d9b59-fb50-421b-b7c0-5bc995999415.jpg)
 
 ## Soal 5  
 Karena kita memiliki 2 Web Server, Loid ingin Ostania diatur sehingga setiap request dari client yang mengakses Garden dengan port 80 akan didistribusikan secara bergantian pada SSS dan Garden secara berurutan dan request dari client yang mengakses SSS dengan port 443 akan didistribusikan secara bergantian pada Garden dan SSS secara berurutan.  
