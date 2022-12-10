@@ -39,6 +39,8 @@ WISE adalah DHCP Server
 		Jumlah Host pada Blackbell adalah 255 host
 		Jumlah Host pada Briar adalah 200 host
 ### Jawab  
+Topologi jaringan yang telah kami buat sebagai berikut:  
+![image](https://user-images.githubusercontent.com/82325182/206819811-7f8af1fa-38b0-46b4-8d3c-e17e6dd81344.png)
 
 ## Soal B  
 Untuk menjaga perdamaian dunia, Loid ingin meminta kalian untuk membuat topologi tersebut menggunakan teknik CIDR atau VLSM setelah melakukan subnetting.  
