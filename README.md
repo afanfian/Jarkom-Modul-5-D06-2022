@@ -42,7 +42,7 @@ WISE adalah DHCP Server
 Topologi jaringan yang telah kami buat sebagai berikut:  
 ![image](https://user-images.githubusercontent.com/82325182/206819811-7f8af1fa-38b0-46b4-8d3c-e17e6dd81344.png)  
 Alamat IP pada pembagian subnetting pada nomer 2, yaitu sebagai berikut:  
- * A1 
+ * **A1** 
    * Eden  
      auto eth0  
 	 iface eth0 inet static  
@@ -61,7 +61,7 @@ Alamat IP pada pembagian subnetting pada nomer 2, yaitu sebagai berikut:
 	 iface eth3 inet static  
          address 10.18.7.129  
          netmask 255.255.255.248  
-  * A2
+  * **A2**
     * Router Westalis mengarah ke A2 (Atas)  
       auto eth0  
 	 iface eth0 inet static  
@@ -73,7 +73,7 @@ Alamat IP pada pembagian subnetting pada nomer 2, yaitu sebagai berikut:
 	 iface eth2 inet static  
          address 10.18.7.145  
          netmask 255.255.255.252  
-  * A3  
+  * **A3**  
     * Router Strix mengarah ke A3 (Kanan)
       auto eth1  
 	iface eth1 inet static  
@@ -85,7 +85,7 @@ Alamat IP pada pembagian subnetting pada nomer 2, yaitu sebagai berikut:
         address 10.18.7.150  
         netmask 255.255.255.252  
         gateway 10.18.7.149  
-  * A4  
+  * **A4**  
     * Router Ostania mengarah ke A4 (Atas)  
       auto eth1
 	iface eth1 inet static
@@ -95,7 +95,7 @@ Alamat IP pada pembagian subnetting pada nomer 2, yaitu sebagai berikut:
     * Blackbell 255 Host  
       auto eth0  
       iface eth0 inet dhcp  
-  * A5  
+  * **A5**  
     * Router Ostania mengarah ke A5 (Kanan)  
       auto eth2  
 	 iface eth2 inet static  
@@ -113,7 +113,7 @@ Alamat IP pada pembagian subnetting pada nomer 2, yaitu sebagai berikut:
          address 10.18.7.139  
          netmask 255.255.255.248  
          gateway 10.18.7.137  
-  * A6  
+  * **A6**  
     * Router Westalis mengarah ke A6 (Bawah)  
       auto eth2  
 	 iface eth2 inet static  
@@ -122,7 +122,7 @@ Alamat IP pada pembagian subnetting pada nomer 2, yaitu sebagai berikut:
     * Forger 62 Host  
       auto eth0  
  	  iface eth0 inet dhcp  
-  * A7  
+  * **A7**  
     * Router Westalis mengarah ke A7 (Kanan)  
       auto eth1  
  	 iface eth1 inet static  
@@ -131,7 +131,7 @@ Alamat IP pada pembagian subnetting pada nomer 2, yaitu sebagai berikut:
     * Desmond 700 Host  
       auto eth0  
 	  iface eth0 inet dhcp  
-  * A8  
+  * **A8**  
     * Router Ostania mengarah ke A8 (Bawah)  
       auto eth3
 	 iface eth3 inet static
@@ -153,7 +153,30 @@ Disini kami menggunakan teknik VLSM yaitu dengan Pembagian Subnetting, Gambar Tr
 ## Soal C  
 Anya, putri pertama Loid, juga berpesan kepada anda agar melakukan Routing agar setiap perangkat pada jaringan tersebut dapat terhubung.  
 ### Jawab  
-
+Ketikkan command ```ip router``` Routing pada 3 router, yaitu Router Strix, Ostania & Westalis, sebagai berikut:  
+  * **Router Strix**  
+    default via 192.168.122.1 dev eth0  metric 305  
+    10.18.0.0/22 via 10.18.7.146 dev eth2   
+    10.18.4.0/23 via 10.18.7.150 dev eth1   
+    10.18.6.0/24 via 10.18.7.150 dev eth1   
+    10.18.7.0/25 via 10.18.7.146 dev eth2   
+    10.18.7.128/29 via 10.18.7.146 dev eth2   
+    10.18.7.136/29 via 10.18.7.150 dev eth1   
+    10.18.7.144/30 dev eth2  proto kernel  scope link  src 10.18.7.145   
+    10.18.7.148/30 dev eth1  proto kernel  scope link  src 10.18.7.149   
+    192.168.122.0/24 dev eth0  proto kernel  scope link  src 192.168.122.183   
+  * **Router Ostania**  
+    default via 10.18.7.149 dev eth0  
+    10.18.4.0/23 dev eth1  proto kernel  scope link  src 10.18.4.1  
+    10.18.6.0/24 dev eth3  proto kernel  scope link  src 10.18.6.1  
+    10.18.7.136/29 dev eth2  proto kernel  scope link  src 10.18.7.137  
+    10.18.7.148/30 dev eth0  proto kernel  scope link  src 10.18.7.150  
+  * **Router Westalis**  
+    default via 10.18.7.145 dev eth0  
+    10.18.0.0/22 dev eth1  proto kernel  scope link  src 10.18.0.1  
+    10.18.7.0/25 dev eth2  proto kernel  scope link  src 10.18.7.1  
+    10.18.7.128/29 dev eth3  proto kernel  scope link  src 10.18.7.129  
+    10.18.7.144/30 dev eth0  proto kernel  scope link  src 10.18.7.146  
 ## Soal D  
 Tugas berikutnya adalah memberikan ip pada subnet Forger, Desmond, Blackbell, dan Briar secara dinamis menggunakan bantuan DHCP server. Kemudian kalian ingat bahwa kalian harus setting DHCP Relay pada router yang menghubungkannya.  
 ### Jawab  
