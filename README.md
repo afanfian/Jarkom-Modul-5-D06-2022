@@ -9,7 +9,7 @@ Rere Arga Dewanata          | 5025201078
 Muhamad Ridho Pratama       | 5025201186  
 
 - [Laporan Resmi Praktikum Modul 5 Jarkom Kelompok D06](#laporan-resmi-praktikum-modul-5-jarkom-kelompok-d06)
-    - [Anggota Kelompok:](#anggota-kelompok)
+  - [Anggota Kelompok:](#anggota-kelompok)
   - [Soal A](#soal-a)
     - [Jawab](#jawab)
   - [Soal B](#soal-b)
@@ -18,8 +18,6 @@ Muhamad Ridho Pratama       | 5025201186
     - [Jawab](#jawab-2)
   - [Soal D](#soal-d)
     - [Jawab](#jawab-3)
-      - [Di server WISE (DHCP Server)](#di-server-wise-dhcp-server)
-      - [Di Router untuk DHCP Relay](#di-router-untuk-dhcp-relay)
   - [Soal 1](#soal-1)
     - [Jawab](#jawab-4)
   - [Soal 2](#soal-2)
@@ -393,4 +391,25 @@ iptables -A PREROUTING -t nat -p tcp --dport 443 -d 10.18.7.139 -j DNAT --to-des
 
 ## Soal 6  
 Karena Loid ingin tau paket apa saja yang di-drop, maka di setiap node server dan router ditambahkan logging paket yang di-drop dengan standard syslog level.  
+
 ### Jawab  
+Memasukkan command berikut pada setiap node server dan router
+```
+  iptables -A INPUT  -j LOG --log-level debug --log-prefix 'Dropped Packet' -m limit --limit 1/second --limit-burst 10
+```
+
+### Pengetesan
+Sudah masuk pada chain iptables dengan menggunakan command `iptables -L` pada setiap node
+![IP Tables Log](https://user-images.githubusercontent.com/70679432/206849682-37e205bf-6bd9-4a61-93e3-035c27c28b0a.jpg)
+Akan tetapi, ketika dilakukan pengujiaan dengan command `dmesg` dan pengecekan pada `/var/log/syslog` tidak ditemukan adanya log yang terkait dengan iptables padahal sudah menjalankan command `service rsyslogd start`.  
+
+### Penjelasan 
+Dari referensi yang telah kami baca, pada ubuntu docker tidak dapat mengakses log tersebut karena kernel-nya tidak mampu meng-handle pesan log dari iptables  
+**Sumber referensi** : https://stackoverflow.com/questions/39632285/how-to-enable-logging-for-iptables-inside-a-docker-container
+
+## Kendala     
+1. Modul 5 kurang lengkap penjelasannya pada bagian materi dan cara pengujiannya
+2. Kurang memahami pengunaan netcat
+3. Pada nomor 6, log tidak muncul 
+
+
