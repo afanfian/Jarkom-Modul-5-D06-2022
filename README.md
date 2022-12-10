@@ -308,7 +308,7 @@ Kalian diminta untuk melakukan drop semua TCP dan UDP dari luar Topologi kalian 
     iptables -A FORWARD -p udp -d 10.18.7.131 -i eth0 -j DROP
     iptables -A FORWARD -p tcp -d 10.18.7.131 -i eth0 -j DROP
     ```
-2. Tes koneksi ke luar di server WISE
+2. Tes koneksi ke luar di server WISE<br>
     ![soal_no2_no2](https://user-images.githubusercontent.com/55425460/206826587-7e1e011a-0ae5-4fe8-ad1b-71f340f41eb6.png)
 
 ## Soal 3  
@@ -322,11 +322,11 @@ Loid meminta kalian untuk membatasi DHCP dan DNS Server hanya boleh menerima mak
     ```
 
 Berikut adalah tampilan saat melakukan `ping` ke Eden dari 3 client yang berbeda:
-- Koneksi pertama (dari Desmond)
+- Koneksi pertama (dari Desmond)<br>
   ![soal_no3_desmond](https://user-images.githubusercontent.com/55425460/206826595-d4706d9e-893e-4e58-a274-8642152400e4.png)
-- Koneksi kedua (dari Forger)
+- Koneksi kedua (dari Forger)<br>
   ![soal_no3_forger](https://user-images.githubusercontent.com/55425460/206826599-613266c2-e6c1-495e-8736-d716548bb0ce.png)
-- Koneksi ketiga (dari Blackbell)
+- Koneksi ketiga (dari Blackbell)<br>
   ![soal_no3_blackbell](https://user-images.githubusercontent.com/55425460/206826601-498f8dc6-8601-404f-ba5e-b5236f45ef45.png)
 
 ## Soal 4  
