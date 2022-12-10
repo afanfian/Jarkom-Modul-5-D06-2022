@@ -40,8 +40,106 @@ WISE adalah DHCP Server
 		Jumlah Host pada Briar adalah 200 host
 ### Jawab  
 Topologi jaringan yang telah kami buat sebagai berikut:  
-![image](https://user-images.githubusercontent.com/82325182/206819811-7f8af1fa-38b0-46b4-8d3c-e17e6dd81344.png)
+![image](https://user-images.githubusercontent.com/82325182/206819811-7f8af1fa-38b0-46b4-8d3c-e17e6dd81344.png)  
+Alamat IP pada pembagian subnetting pada nomer 2, yaitu sebagai berikut:  
+ * A1 
+   * Eden  
+     auto eth0  
+	 iface eth0 inet static  
+         address 10.18.7.130  
+         netmask 255.255.255.248  
+         gateway 10.18.7.129  
 
+   * WISE  
+     auto eth0  
+	 iface eth0 inet static  
+         address 10.18.7.131  
+         netmask 255.255.255.248  
+         gateway 10.18.7.129  
+   * Router Westalis mengarah ke A1 (Kiri)  
+      auto eth3  
+	 iface eth3 inet static  
+         address 10.18.7.129  
+         netmask 255.255.255.248  
+  * A2
+    * Router Westalis mengarah ke A2 (Atas)  
+      auto eth0  
+	 iface eth0 inet static  
+         address 10.18.7.146  
+         netmask 255.255.255.252  
+         gateway 10.18.7.145  
+    * Router Strix mengarah ke A2 (Bawah)  
+      auto eth2  
+	 iface eth2 inet static  
+         address 10.18.7.145  
+         netmask 255.255.255.252  
+  * A3  
+    * Router Strix mengarah ke A3 (Kanan)
+      auto eth1  
+	iface eth1 inet static  
+        address 10.18.7.149  
+        netmask 255.255.255.252  
+    * Router Ostania mengarah ke A3 (Kiri)  
+      auto eth0  
+	iface eth0 inet static  
+        address 10.18.7.150  
+        netmask 255.255.255.252  
+        gateway 10.18.7.149  
+  * A4  
+    * Router Ostania mengarah ke A4 (Atas)  
+      auto eth1
+	iface eth1 inet static
+        address 10.18.4.1
+        netmask 255.255.254.0
+
+    * Blackbell 255 Host  
+      auto eth0  
+      iface eth0 inet dhcp  
+  * A5  
+    * Router Ostania mengarah ke A5 (Kanan)  
+      auto eth2  
+	 iface eth2 inet static  
+         address 10.18.7.137  
+         netmask 255.255.255.248  
+    * Garden  
+      auto eth0  
+	 iface eth0 inet static  
+         address 10.18.7.138  
+         netmask 255.255.255.248  
+         gateway 10.18.7.137  
+    * SSS  
+      auto eth0  
+	 iface eth0 inet static  
+         address 10.18.7.139  
+         netmask 255.255.255.248  
+         gateway 10.18.7.137  
+  * A6  
+    * Router Westalis mengarah ke A6 (Bawah)  
+      auto eth2  
+	 iface eth2 inet static  
+         address 10.18.7.1  
+         netmask 255.255.255.128  
+    * Forger 62 Host  
+      auto eth0  
+ 	  iface eth0 inet dhcp  
+  * A7  
+    * Router Westalis mengarah ke A7 (Kanan)  
+      auto eth1  
+ 	 iface eth1 inet static  
+         address 10.18.0.1  
+         netmask 255.255.252.0  
+    * Desmond 700 Host  
+      auto eth0  
+	  iface eth0 inet dhcp  
+  * A8  
+    * Router Ostania mengarah ke A8 (Bawah)  
+      auto eth3
+	 iface eth3 inet static
+         address 10.18.6.1
+         netmask 255.255.255.0
+    * Briar 200 Host  
+      auto eth0  
+	  iface eth0 inet dhcp  
 ## Soal B  
 Untuk menjaga perdamaian dunia, Loid ingin meminta kalian untuk membuat topologi tersebut menggunakan teknik CIDR atau VLSM setelah melakukan subnetting.  
 ### Jawab  
