@@ -335,7 +335,7 @@ Berikut adalah tampilan saat melakukan `ping` ke Eden dari 3 client yang berbeda
 ## Soal 4  
 Akses menuju Web Server hanya diperbolehkan disaat jam kerja yaitu Senin sampai Jumat pada pukul 07.00 - 16.00.  
 ### Jawab  
-Menambahkan command tersebut di Web Server (Garden dan SSS) 
+Menambahkan command berikut di Web Server (Garden dan SSS) 
 ```
     iptables -A INPUT -m time --timestart 07:00 --timestop 16:00 --weekdays Mon,Tue,Wed,Thu,Fri -j ACCEPT
     iptables -A INPUT -j REJECT
@@ -355,8 +355,41 @@ Menambahkan command tersebut di Web Server (Garden dan SSS)
 ![Ping BlackBell ke SSS diluar jam kerja](https://user-images.githubusercontent.com/70679432/206842011-0a1d9b59-fb50-421b-b7c0-5bc995999415.jpg)
 
 ## Soal 5  
-Karena kita memiliki 2 Web Server, Loid ingin Ostania diatur sehingga setiap request dari client yang mengakses Garden dengan port 80 akan didistribusikan secara bergantian pada SSS dan Garden secara berurutan dan request dari client yang mengakses SSS dengan port 443 akan didistribusikan secara bergantian pada Garden dan SSS secara berurutan.  
+Karena kita memiliki 2 Web Server, Loid ingin Ostania diatur sehingga setiap request dari client yang mengakses Garden dengan port 80 akan didistribusikan secara bergantian pada SSS dan Garden secara berurutan dan request dari client yang mengakses SSS dengan port 443 akan didistribusikan secara bergantian pada Garden dan SSS secara berurutan.   
+
 ### Jawab  
+Menambahkan command berikut di Ostania.
+```
+# Akses ke Garden lewat port 80
+iptables -A PREROUTING -t nat -p tcp --dport 80 -d 10.18.7.138 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination 10.18.7.138
+iptables -A PREROUTING -t nat -p tcp --dport 80 -d 10.18.7.138 -j DNAT --to-destination 10.18.7.139
+
+# Akses ke SSS lewat port 443
+iptables -A PREROUTING -t nat -p tcp --dport 443 -d 10.18.7.139 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination 10.18.7.138
+iptables -A PREROUTING -t nat -p tcp --dport 443 -d 10.18.7.139 -j DNAT --to-destination 10.18.7.139
+```
+
+### Penjelasan  
+1. `--dport` = Mengatur destination port yang digunakan (dalam hal ini 80 dan 443)  
+2. `--every 2` = Mengatur distribusi request 
+3. `--to-destination` = Mengatur ip destination  
+
+### Pengetesan  
+[Skenario 1 : Mengakses Garden dengan port 80]
+1. Menjalankan command `while true; do nc -l -p 80 -c 'echo "Dari Garden"'; done` pada node Garden
+   ![NC While True Garden port 80 ](https://user-images.githubusercontent.com/70679432/206849421-ab6c7110-ae36-4d0e-8d7d-f0a7c453c347.jpg)
+2. Menjalankan command `while true; do nc -l -p 80 -c 'echo "Dari SSS"'; done` pada node SSS
+   ![NC While True SSS port 80](https://user-images.githubusercontent.com/70679432/206849440-72497f38-a96c-4ff2-b283-39fc19def59f.jpg)  
+3. Menjalankan command `nc [IP Garden] 80` pada node BlackBell  
+   ![NC dari Blackbell port 80](https://user-images.githubusercontent.com/70679432/206849361-9f47c002-5ca0-44e0-a725-f89074a5222e.jpg)
+   
+[Skenario 2 : Mengakses SSS dengan port 443]  
+1. Menjalankan command `while true; do nc -l -p 443 -c 'echo "Dari Garden"'; done` pada node Garden
+   ![NC While True Garden port 443](https://user-images.githubusercontent.com/70679432/206849540-cce7e301-3d73-4489-a22f-8aaca14ba660.jpg)
+2. Menjalankan command `while true; do nc -l -p 443 -c 'echo "Dari SSS"'; done` pada node SSS
+   ![NC While True SSS port 443](https://user-images.githubusercontent.com/70679432/206849547-6895e35d-38dc-4697-bdd4-860633be7b00.jpg)
+3. Menjalankan command `nc [IP SSS] 443` pada node BlackBell   
+   ![NC dari Blackbell port 443](https://user-images.githubusercontent.com/70679432/206849554-f9ebff0e-ff35-481f-bbf4-b260ef72d07c.jpg)
 
 ## Soal 6  
 Karena Loid ingin tau paket apa saja yang di-drop, maka di setiap node server dan router ditambahkan logging paket yang di-drop dengan standard syslog level.  
