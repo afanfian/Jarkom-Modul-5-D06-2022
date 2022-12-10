@@ -43,7 +43,13 @@ WISE adalah DHCP Server
 ## Soal B  
 Untuk menjaga perdamaian dunia, Loid ingin meminta kalian untuk membuat topologi tersebut menggunakan teknik CIDR atau VLSM setelah melakukan subnetting.  
 ### Jawab  
-
+Disini kami menggunakan teknik VLSM yaitu dengan Pembagian Subnetting, Gambar Tree dan Pembagian Host ID sebagai berikut:  
+  * Pembagian subnetting menggunakan VLSM (Variable Length Subnet Masking):  
+  ![Pembagian Subnet](https://user-images.githubusercontent.com/82325182/206819220-5ed9b840-7ddd-41c6-b7f1-a13899d6920c.png)
+  * Pembuatan Tree dari pembagian subnetting diatas:  
+  ![Pembagian Subnet-VLSM_Tree drawio](https://user-images.githubusercontent.com/82325182/206819251-7c503dc5-3175-4b9c-88d0-002de666c687.png)
+  * Pembagian Host ID:  
+  ![Pembagian Host ID](https://user-images.githubusercontent.com/82325182/206819261-bf2dbccf-34b6-48e2-8174-7f87b86e5c28.png)
 ## Soal C  
 Anya, putri pertama Loid, juga berpesan kepada anda agar melakukan Routing agar setiap perangkat pada jaringan tersebut dapat terhubung.  
 ### Jawab  
